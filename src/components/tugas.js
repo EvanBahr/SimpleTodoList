@@ -93,145 +93,150 @@ export default function Tugas() {
 
   // Secara keseluruhan, fungsi handleDragEnd ini digunakan untuk mengupdate state aplikasi ketika sebuah item berhasil di-drag dan drop, dengan mengubah posisi item di dalam grup yang berbeda.
   return (
-    <div className="bg-[#181818] min-h-screen py-10 md:p-20">
-      <h1 className="text-white text-3xl font-semibold text-center md:text-start">
-        Simple TODO List <span className="text-gradient">APP</span>
-      </h1>
-      <div className=" border-[#4fce99] px-5 md:px-20  py-7  w-full md:max-w-[50rem] mx-auto mt-5 md:mt-10">
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="  space-y-7 ">
-            {group.map((item, idx) => (
-              <div key={idx} className="py-5 ">
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={() => dellGroup(idx)}
-                          className="font-bold text-4xl text-[#0C86BD]"
-                        >
-                          <TiDeleteOutline />
-                        </button>
-                        <input
-                          type="text"
-                          onKeyDown={(e) =>
-                            e.key === "Enter" && e.currentTarget.blur()
-                          }
-                          value={item.title}
-                          placeholder="type the name of title"
-                          onChange={(e) => updateTitle(e, idx)}
-                          // onKeyDown={(e) => enterTitle(e, idx)}
-                          className="text-xl md:text-[1.8rem] font-bold text-center focus:outline-none focus:text-[#4fce99] bg-transparent text-[#f47631]  py-2 w-full"
-                        />
-                        <Disclosure.Button
-                          as="div"
-                          className="flex gap-3 items-center"
-                        >
-                          <FaChevronDown
-                            className={`${
-                              open ? "rotate-180 transform" : ""
-                            } text-2xl text-[#0C86BD] cursor-pointer`}
-                          />
-                        </Disclosure.Button>
-                      </div>
-                      <Disclosure.Panel>
-                        <div>
-                          <Droppable
-                            key={idx}
-                            index={idx}
-                            droppableId={`group ${idx}`}
+    <div>
+      <div className="bg-[#181818] min-h-screen py-10 md:p-20">
+        <h1 className="text-white text-3xl font-semibold text-center md:text-start">
+          Simple TODO List <span className="text-gradient">APP</span>
+        </h1>
+        <div className=" border-[#4fce99] px-5 md:px-20  py-7  w-full md:max-w-[50rem] mx-auto mt-5 md:mt-10">
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <div className="  space-y-7 ">
+              {group.map((item, idx) => (
+                <div key={idx} className="py-5 ">
+                  <Disclosure>
+                    {({ open }) => (
+                      <>
+                        <div className="flex items-center gap-3">
+                          <button
+                            onClick={() => dellGroup(idx)}
+                            className="font-bold text-4xl text-[#0C86BD]"
                           >
-                            {(provided) => (
-                              <div
-                                {...provided.droppableProps}
-                                ref={provided.innerRef}
-                                className=" space-y-3 py-7"
-                              >
-                                {item.list.map((item2, idx2) => (
-                                  <Draggable
-                                    key={`item ${idx} ${idx2}`}
-                                    index={idx2}
-                                    draggableId={`item ${idx} ${idx2}`}
-                                  >
-                                    {(provided) => (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        className="bg-gradient-to-b from-[#0C86BD] via-black to-black p-[1px]  rounded-full"
-                                      >
-                                        <div className="flex gap-3 px-3 md:px-6 py-3 bg-black rounded-full">
-                                          <DraggableIcon />
-                                          <input
-                                            type="text"
-                                            value={item2}
-                                            placeholder="type the name of item"
-                                            onChange={(e) =>
-                                              updateItem(e, idx, idx2)
-                                            }
-                                            onKeyDown={(e) =>
-                                              e.key === "Enter" &&
-                                              e.currentTarget.blur()
-                                            }
-                                            className="w-auto grow focus:outline-none pl-3 md:py-2  text-white focus:text-[#0C86BD] bg-transparent rounded-full"
-                                          />
-                                          <button
-                                            className="text-[17px] text-white"
-                                            onClick={() => delItem(idx, idx2)}
-                                          >
-                                            <FaTrash />
-                                          </button>
+                            <TiDeleteOutline />
+                          </button>
+                          <input
+                            type="text"
+                            onKeyDown={(e) =>
+                              e.key === "Enter" && e.currentTarget.blur()
+                            }
+                            value={item.title}
+                            placeholder="type the name of title"
+                            onChange={(e) => updateTitle(e, idx)}
+                            // onKeyDown={(e) => enterTitle(e, idx)}
+                            className="text-xl md:text-[1.8rem] font-bold text-center focus:outline-none focus:text-[#4fce99] bg-transparent text-[#f47631]  py-2 w-full"
+                          />
+                          <Disclosure.Button
+                            as="div"
+                            className="flex gap-3 items-center"
+                          >
+                            <FaChevronDown
+                              className={`${
+                                open ? "rotate-180 transform" : ""
+                              } text-2xl text-[#0C86BD] cursor-pointer`}
+                            />
+                          </Disclosure.Button>
+                        </div>
+                        <Disclosure.Panel>
+                          <div>
+                            <Droppable
+                              key={idx}
+                              index={idx}
+                              droppableId={`group ${idx}`}
+                            >
+                              {(provided) => (
+                                <div
+                                  {...provided.droppableProps}
+                                  ref={provided.innerRef}
+                                  className=" space-y-3 py-7"
+                                >
+                                  {item.list.map((item2, idx2) => (
+                                    <Draggable
+                                      key={`item ${idx} ${idx2}`}
+                                      index={idx2}
+                                      draggableId={`item ${idx} ${idx2}`}
+                                    >
+                                      {(provided) => (
+                                        <div
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          className="bg-gradient-to-b from-[#0C86BD] via-black to-black p-[1px]  rounded-full"
+                                        >
+                                          <div className="flex gap-3 px-3 md:px-6 py-3 bg-black rounded-full">
+                                            <DraggableIcon />
+                                            <input
+                                              type="text"
+                                              value={item2}
+                                              placeholder="type the name of item"
+                                              onChange={(e) =>
+                                                updateItem(e, idx, idx2)
+                                              }
+                                              onKeyDown={(e) =>
+                                                e.key === "Enter" &&
+                                                e.currentTarget.blur()
+                                              }
+                                              className="w-auto grow focus:outline-none pl-3 md:py-2  text-white focus:text-[#0C86BD] bg-transparent rounded-full"
+                                            />
+                                            <button
+                                              className="text-[17px] text-white"
+                                              onClick={() => delItem(idx, idx2)}
+                                            >
+                                              <FaTrash />
+                                            </button>
+                                          </div>
                                         </div>
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                ))}
+                                      )}
+                                    </Draggable>
+                                  ))}
+                                </div>
+                              )}
+                            </Droppable>
+                            <div className="border border-white rounded-xl">
+                              <div className="flex gap-3 justify-between px-6 py-3 rounded-full">
+                                <input
+                                  type="text"
+                                  onKeyDown={(e) => addItem(e, idx)}
+                                  onChange={(e) => {
+                                    setItemInput({
+                                      idx: idx,
+                                      value: e.target.value,
+                                    });
+                                  }}
+                                  value={
+                                    itemInput.idx === idx ? itemInput.value : ""
+                                  }
+                                  // onFocus={() => console.log("focus", idx)}
+                                  // onBlur={() => console.log("blur", idx)}
+                                  // value={e.target.index === idx ? itemInput : ""}
+                                  placeholder="add new todo Item"
+                                  className=" grow focus:outline-none  text-white bg-transparent pl-3 md:py-2  rounded-full "
+                                />
+                                <button
+                                  className="text-white md:hidden"
+                                  onClick={() => addItemWhenMobile(idx)}
+                                >
+                                  save
+                                </button>
                               </div>
-                            )}
-                          </Droppable>
-                          <div className="border border-white rounded-xl">
-                            <div className="flex gap-3 justify-between px-6 py-3 rounded-full">
-                              <input
-                                type="text"
-                                onKeyDown={(e) => addItem(e, idx)}
-                                onChange={(e) => {
-                                  setItemInput({
-                                    idx: idx,
-                                    value: e.target.value,
-                                  });
-                                }}
-                                value={
-                                  itemInput.idx === idx ? itemInput.value : ""
-                                }
-                                // onFocus={() => console.log("focus", idx)}
-                                // onBlur={() => console.log("blur", idx)}
-                                // value={e.target.index === idx ? itemInput : ""}
-                                placeholder="add new todo Item"
-                                className=" grow focus:outline-none  text-white bg-transparent pl-3 md:py-2  rounded-full "
-                              />
-                              <button
-                                className="text-white md:hidden"
-                                onClick={() => addItemWhenMobile(idx)}
-                              >
-                                save
-                              </button>
                             </div>
                           </div>
-                        </div>
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-              </div>
-            ))}
-          </div>
-        </DragDropContext>
-        <input
-          type="text"
-          onKeyDown={addGroup}
-          placeholder="Add New Todo GROUP"
-          className="border border-[#f47631] bg-transparent text-white h-[3rem] md:h-[4.5rem] w-full px-5 mt-16 rounded-xl"
-        />
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                </div>
+              ))}
+            </div>
+          </DragDropContext>
+          <input
+            type="text"
+            onKeyDown={addGroup}
+            placeholder="Add New Todo GROUP"
+            className="border border-[#f47631] bg-transparent text-white h-[3rem] md:h-[4.5rem] w-full px-5 mt-16 rounded-xl"
+          />
+        </div>
+      </div>{" "}
+      <div className="bg-gray-800 text-sm p-4 text-center text-white">
+        Copyright © 2023 Evan Bahr with ReactJs
       </div>
     </div>
   );
